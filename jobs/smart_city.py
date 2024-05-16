@@ -19,9 +19,9 @@ def main():
         .config("spark.hadoop.fs.s3a.endpoint", configuration["MINIO_ENDPOINT"])
         .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false")
         .config("spark.hadoop.fs.s3a.path.style.access", "true")
-        # .config("spark.hadoop.fs.s3a.attempts.maximum", "5")
-        # .config("spark.hadoop.fs.s3a.connection.establish.timeout", "5000")
-        # .config("spark.hadoop.fs.s3a.connection.timeout", "10000")
+        .config("spark.hadoop.fs.s3a.attempts.maximum", "5")
+        .config("spark.hadoop.fs.s3a.connection.establish.timeout", "5000")
+        .config("spark.hadoop.fs.s3a.connection.timeout", "10000")
         .getOrCreate()
     )
 
@@ -102,7 +102,7 @@ def main():
         return (
             spark.readStream.format("kafka")
             .option(
-                "kafka.bootstrap.servers", "kafka-kraft:9092"
+                "kafka.bootstrap.servers", "kafka-kraft:29092"
             )  # TODO: Resolve Broker unavailable error with Spark
             .option("subscribe", topic)
             .option("startingOffsets", "earliest")

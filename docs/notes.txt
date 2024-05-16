@@ -1,4 +1,5 @@
 # List the topics
+docker exec -it kafka-kraft bash
 kafka-topics --bootstrap-server kafka-kraft:9092 --list
 
 # Submit job to the Spark cluster
@@ -7,3 +8,7 @@ spark-submit \
 --master spark://spark-master:7077 \
 --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1,org.apache.hadoop:hadoop-aws:3.3.6,com.amazonaws:aws-java-sdk:1.12.629 \
 jobs/smart_city.py
+
+# Connect to my-console (ubuntu) to check connectivity in the network
+docker exec -it my-console bash
+apt update && apt install -y curl iputils-ping

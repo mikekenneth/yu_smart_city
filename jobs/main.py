@@ -21,9 +21,9 @@ LATITUDE_INCREMENT = (BIRMINGHAM_COORDINATES["latitude"] - LONDON_COORDINATES["l
 LONGITUDE_INCREMENT = (BIRMINGHAM_COORDINATES["longitude"] - LONDON_COORDINATES["longitude"]) / 100
 
 # Environment Variables for configuration
-KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "10.77.50.144:9092")
+KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
 VEHICLE_TOPIC = os.getenv("VEHICLE_TOPIC", "vehicle_data")
-GPS_TOPIC = os.getenv("GPS_TOPIC", "gsp_data")
+GPS_TOPIC = os.getenv("GPS_TOPIC", "gps_data")
 TRAFFIC_TOPIC = os.getenv("TRAFFIC_TOPIC", "traffic_data")
 WEATHER_TOPIC = os.getenv("WEATHER_TOPIC", "weather_data")
 EMERGENCY_TOPIC = os.getenv("EMERGENCY_TOPIC", "emergency_data")
@@ -176,7 +176,8 @@ def simulate_journey(producer: SerializingProducer, device_id: str):
         produce_data_to_kafka(producer=producer, topic=WEATHER_TOPIC, data=weather_data)
         produce_data_to_kafka(producer=producer, topic=EMERGENCY_TOPIC, data=emergency_incident_data)
 
-        time.sleep(1)  # Every 5 seconds
+        print("Sleeping for 5sec...")
+        time.sleep(5)  # Every 5 seconds
 
 
 if __name__ == "__main__":
